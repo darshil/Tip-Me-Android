@@ -14,15 +14,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final NumberFormat currentFormat = NumberFormat.getCurrencyInstance();
     private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
-    double billAmount = 0.0;
-    double percent = 0.15;
-    TextView amountTextView;
-    TextView percentTextView;
-    TextView tipTextView;
-    TextView totalTextView;
+    private double billAmount = 0.0;
+    private double percent = 0.15;
+    private TextView amountTextView;
+    private TextView percentTextView;
+    private TextView tipTextView;
+    private TextView totalTextView;
 
-    double finalAmount;
-    double tip;
+
 
 
 
@@ -32,16 +31,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         amountTextView = (TextView)findViewById(R.id.amountTextView);
-
         percentTextView = (TextView)findViewById(R.id.percentTextView);
-
-            tipTextView = (TextView) findViewById(R.id.tipTextView);
+        tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
-
         tipTextView.setText(currentFormat.format(0));
-
         totalTextView.setText(currentFormat.format(0));
-
             EditText amountEditText = (EditText)findViewById(R.id.amountEditText);
         amountEditText.addTextChangedListener(amountEditTextWatcher);
 
@@ -52,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private void calculate (){
         percentTextView.setText(percentFormat.format(percent));
 
-        tip = billAmount * percent;
-        finalAmount = billAmount + tip;
+        double tip = billAmount * percent;
+        double finalAmount = billAmount + tip;
 
         tipTextView.setText(currentFormat.format(tip));
         totalTextView.setText(currentFormat.format(finalAmount));
@@ -86,20 +80,20 @@ public class MainActivity extends AppCompatActivity {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
           // fixed app crash on empty userInput
 
-            try {
-              billAmount = Double.parseDouble(s.toString()) / 100;
-              amountTextView.setText(currentFormat.format(billAmount));
-          } catch (NumberFormatException e){
-                amountTextView.setText("");
-              billAmount = 0.0;
-          }
-            calculate();// update textviews and calculations
 
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+            try {
+                billAmount = Double.parseDouble(s.toString()) / 100;
+                amountTextView.setText(currentFormat.format(billAmount));
+            } catch (NumberFormatException e){
+                amountTextView.setText("");
+                billAmount = 0.0;
+            }
+            calculate();// update textviews and calculations
         }
 
         @Override
