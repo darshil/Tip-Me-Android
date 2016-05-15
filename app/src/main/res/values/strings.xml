@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tip Me</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="percent_text">15%</string>
+    <string name="tip_text">Tip</string>
+    <string name="total_text">Total</string>
 </resources>
