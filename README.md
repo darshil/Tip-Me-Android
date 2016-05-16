@@ -8,4 +8,5 @@
  <br>
   <img src="render.png">
   
-    <p> Full Feature List Coming Soon...</p>
+    Full Feature List Coming Soon...
+    Made With Love by Darshil Patel
