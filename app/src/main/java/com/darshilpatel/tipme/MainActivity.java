@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView percentTextView;
     private TextView tipTextView;
     private TextView totalTextView;
+    private TextView peopleTextView;
 
 
 
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         percentTextView = (TextView)findViewById(R.id.percentTextView);
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
+        peopleTextView = (TextView)findViewById(R.id.peopleTextView);
+
+
         tipTextView.setText(currentFormat.format(0));
         totalTextView.setText(currentFormat.format(0));
             EditText amountEditText = (EditText)findViewById(R.id.amountEditText);
@@ -41,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar percentSeekBar = (SeekBar)findViewById(R.id.percentSeekBar);
         percentSeekBar.setOnSeekBarChangeListener(seekBarListener);
+
+        SeekBar peopleSeekBar = (SeekBar)findViewById(R.id.peopleSeekBar);
+        peopleSeekBar.setOnSeekBarChangeListener(seekPeopleListener);
     }
 
     private void calculate (){
@@ -51,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         tipTextView.setText(currentFormat.format(tip));
         totalTextView.setText(currentFormat.format(finalAmount));
+    }
+
+    private void calculatePeople(){
+        peopleTextView.setText(percentFormat.format(percent));
     }
         //seekbar listener
 
@@ -98,6 +109,28 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
+    // everytime the user moves the slider, it will re calculate. SO the calculations are real time.
+    private final SeekBar.OnSeekBarChangeListener seekPeopleListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+
+            calculate(); // calls the calculation function
+
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
 
         }
     };
