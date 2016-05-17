@@ -21,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView tipTextView;
     private TextView totalTextView;
     private TextView peopleTextView;
+    private TextView personTextView;
 
+    private double amountOfPeople;
+double personAmount;
 
 
 
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
         peopleTextView = (TextView)findViewById(R.id.peopleTextView);
+        personTextView = (TextView)findViewById(R.id.personTextView);
+
+
 
 
         tipTextView.setText(currentFormat.format(0));
@@ -62,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void calculatePeople(){
         peopleTextView.setText(percentFormat.format(percent));
+
+        percentTextView.setText(percentFormat.format(percent));
+
+        double tip = billAmount * percent;
+        double finalAmount = billAmount + tip;
+
+        personAmount = finalAmount / amountOfPeople;
+
+        tipTextView.setText(currentFormat.format(tip));
+        totalTextView.setText(currentFormat.format(finalAmount));
+        personTextView.setText(currentFormat.format(personAmount));
+
     }
         //seekbar listener
 
@@ -119,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-
-            calculate(); // calls the calculation function
+            amountOfPeople = progress;
+            calculatePeople(); // calls the calculation function
 
         }
 
