@@ -123,6 +123,8 @@ double personAmount;
                 billAmount = 0.0;
             }
             calculate();// update textviews and calculations
+
+            calculatePeople();
         }
 
         @Override
